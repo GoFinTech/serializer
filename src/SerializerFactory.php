@@ -8,6 +8,7 @@ use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\YamlEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -28,7 +29,8 @@ class SerializerFactory
         $info = new PropertyInfoExtractor([$ref], [$doc, $ref], [$doc], [$ref], [$ref]);
         $norm = new ObjectNormalizer(
             null, null, null, $info);
-        static::$instance = new Serializer([$norm], [new JsonEncoder(), new YamlEncoder(), new XmlEncoder()]);
+        $arr = new ArrayDenormalizer();
+        static::$instance = new Serializer([$norm, $arr], [new JsonEncoder(), new YamlEncoder(), new XmlEncoder()]);
         return static::$instance;
     }
 }
