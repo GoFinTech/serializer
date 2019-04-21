@@ -1,0 +1,29 @@
+{
+    "name": "gofintech/serializer",
+    "description": "PHP object serializer when you need a stand-alone component",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antanas Kompanas",
+            "email": "a.kompanas@gofintech.lt"
+        }
+    ],
+    "require": {
+        "symfony/serializer": "^4.0",
+        "symfony/property-access": "^4.0",
+        "symfony/property-info": "^4.0",
+        "phpdocumentor/reflection-docblock": "^4.0",
+        "doctrine/annotations": "^1.6",
+        "doctrine/cache": "^1.8",
+        "symfony/validator": "^4.0",
+        "symfony/yaml": "^4.0"
+    },
+    "suggest": {
+        "indigophp/doctrine-annotation-autoload": "Registers validation annotations at run time"
+    },
+    "autoload": {
+        "psr-4": {
+            "GoFinTech\\Serializer\\": "src/"
+        }
+    }
+}
