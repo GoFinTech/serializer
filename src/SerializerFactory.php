@@ -27,10 +27,11 @@ class SerializerFactory
         $doc = new PhpDocExtractor();
         $ref = new ReflectionExtractor();
         $info = new PropertyInfoExtractor([$ref], [$doc, $ref], [$doc], [$ref], [$ref]);
-        $norm = new ObjectNormalizer(
-            null, null, null, $info);
-        $arr = new ArrayDenormalizer();
-        static::$instance = new Serializer([$norm, $arr], [new JsonEncoder(), new YamlEncoder(), new XmlEncoder()]);
+        $norm = [new ObjectNormalizer(null, null, null, $info)];
+        $norm[] = new ArrayDenormalizer();
+        if (class_exists('GoFinTech\Date\Date'))
+            $norm[] = new DateNormalizer();
+        static::$instance = new Serializer($norm, [new JsonEncoder(), new YamlEncoder(), new XmlEncoder()]);
         return static::$instance;
     }
 }
