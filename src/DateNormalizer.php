@@ -15,7 +15,7 @@ class DateNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     public function supportsNormalization($data, $format = null)
     {
-        return is_subclass_of($data, 'GoFinTech\Date\Date');
+        return get_class($data) == 'GoFinTech\Date\Date';
     }
 
     public function normalize($object, $format = null, array $context = [])
